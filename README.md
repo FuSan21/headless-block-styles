@@ -47,6 +47,34 @@ Every REST-enabled post type response (`/wp/v2/posts`, `/wp/v2/pages`, …) gain
 
 Not needed on a request? Exclude it: `/wp/v2/posts?_fields=id,title,content`.
 
+### `rendered_blocks` field on posts/pages
+
+For the "render WordPress's HTML faithfully" path. WordPress generates some block-support CSS at render time — layout container rules (`wp-container-*` flex/grid/gap/justification), element link/button colors (`wp-elements-*`), duotone filters — and prints it in a `<style>` tag on its own frontend, so it never reaches REST consumers. This field captures that CSS from a render of the post content:
+
+```jsonc
+{
+  "html": "<div class=\"wp-block-group is-layout-flex wp-container-core-group-is-layout-788841da ...\">…</div>",
+  "css": ".wp-container-core-group-is-layout-788841da { flex-wrap: nowrap; justify-content: space-between; } .wp-elements-… a:where(:not(.wp-element-button)) { color: #cf2e2e; }",
+  "svg": "<svg …><filter id=\"wp-duotone-…\">…</filter></svg>"
+}
+```
+
+Use `html`, `css`, and `svg` together — the generated container class names are unique per render, so the CSS only matches the HTML it shipped with (don't mix it with `content.rendered`):
+
+```jsx
+export default function WpContent({ rendered_blocks: { html, css, svg } }) {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <span dangerouslySetInnerHTML={{ __html: svg }} />
+    </>
+  );
+}
+```
+
+The base `.is-layout-flex` / gap rules live in the global stylesheet (`base-layout-styles`), so load the `/stylesheet` endpoint alongside this.
+
 ## Next.js usage
 
 ### 1. Load the global stylesheet (App Router)

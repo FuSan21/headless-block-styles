@@ -26,3 +26,4 @@ define( 'HEADLESS_BLOCK_STYLES_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require HEADLESS_BLOCK_STYLES_PLUGIN_DIR . 'includes/styles.php';
 require HEADLESS_BLOCK_STYLES_PLUGIN_DIR . 'includes/rest.php';
+require HEADLESS_BLOCK_STYLES_PLUGIN_DIR . 'includes/render.php';

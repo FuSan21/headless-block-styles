@@ -139,6 +139,22 @@ function get_theme_settings() {
 }
 
 /**
+ * Returns the post types that expose the plugin's REST fields.
+ *
+ * @return string[]
+ */
+function supported_post_types() {
+	$post_types = get_post_types( array( 'show_in_rest' => true ), 'names' );
+
+	/**
+	 * Filters the post types that expose the plugin's REST fields.
+	 *
+	 * @param string[] $post_types Post type names.
+	 */
+	return apply_filters( 'headless_block_styles_post_types', array_values( $post_types ) );
+}
+
+/**
  * Registers the `block_data` field on all REST-enabled post types. The field
  * contains the parsed block tree where every block carries `inlineStyles`
  * (a React CSSProperties-shaped object) and `classNames`.
@@ -146,17 +162,8 @@ function get_theme_settings() {
  * @return void
  */
 function register_block_data_field() {
-	$post_types = get_post_types( array( 'show_in_rest' => true ), 'names' );
-
-	/**
-	 * Filters the post types that expose the block_data REST field.
-	 *
-	 * @param string[] $post_types Post type names.
-	 */
-	$post_types = apply_filters( 'headless_block_styles_post_types', array_values( $post_types ) );
-
 	register_rest_field(
-		$post_types,
+		supported_post_types(),
 		'block_data',
 		array(
 			'get_callback' => __NAMESPACE__ . '\\get_block_data',

@@ -36,7 +36,11 @@ Every REST-enabled post type response gains a `block_data` field: the parsed blo
 
 `inlineStyles` covers the `style` attribute (spacing, borders, typography, colors — via the WP Style Engine), preset attributes (`backgroundColor`, `textColor`, `gradient`, `borderColor`, `fontSize`, `fontFamily`), and layout (`width`, `height`, `layout.contentSize/wideSize/justifyContent`).
 
-Not needed on a request? Exclude it: `/wp/v2/posts?_fields=id,title,content`.
+**`rendered_blocks` field on posts and pages**
+
+For rendering WordPress's HTML faithfully: returns `html`, `css`, and `svg` — the rendered block markup together with the block-support CSS WordPress generates at render time (layout container rules, element link/button colors, duotone filters) and the duotone SVG definitions. On a normal WordPress frontend this CSS is printed in a `<style>` tag and never reaches REST consumers; here it is captured from the same render as the returned HTML so the generated class names always match.
+
+Not needed on a request? Exclude fields: `/wp/v2/posts?_fields=id,title,content`.
 
 = Filters =
 
@@ -69,4 +73,4 @@ No, same as the WordPress global stylesheet itself. For full parity, import `@wo
 == Changelog ==
 
 = 0.1.0 =
-* Initial release: global stylesheet and theme settings REST endpoints, `block_data` REST field with server-computed inline styles and class names.
+* Initial release: global stylesheet and theme settings REST endpoints, `block_data` REST field with server-computed inline styles and class names, `rendered_blocks` REST field capturing render-time block-support CSS and duotone SVG.
