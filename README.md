@@ -142,6 +142,6 @@ The global stylesheet does not include the core block library CSS. For full pari
 
 | Filter | Purpose |
 | --- | --- |
-| `hbs_block_inline_styles` | Modify a block's computed style object. Args: `$styles`, `$attrs`. |
-| `hbs_block_class_names` | Modify a block's computed class names. Args: `$classnames`, `$attrs`. |
-| `hbs_post_types` | Which post types get the `block_data` field. |
+| `headless_block_styles_block_inline_styles` | Modify a block's computed style object. Args: `$styles`, `$attrs`. |
+| `headless_block_styles_block_class_names` | Modify a block's computed class names. Args: `$classnames`, `$attrs`. |
+| `headless_block_styles_post_types` | Which post types get the `block_data` field. |

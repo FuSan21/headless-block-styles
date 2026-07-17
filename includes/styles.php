@@ -120,7 +120,7 @@ function compute_inline_styles( array $attrs ) {
 	 * @param array $styles Computed styles (camelCase keys).
 	 * @param array $attrs  Block attributes.
 	 */
-	return apply_filters( 'hbs_block_inline_styles', $styles, $attrs );
+	return apply_filters( 'headless_block_styles_block_inline_styles', $styles, $attrs );
 }
 
 /**
@@ -179,7 +179,7 @@ function compute_class_names( array $attrs ) {
 	 * @param string[] $classnames Computed class names.
 	 * @param array    $attrs      Block attributes.
 	 */
-	return apply_filters( 'hbs_block_class_names', array_values( array_unique( array_filter( $classnames ) ) ), $attrs );
+	return apply_filters( 'headless_block_styles_block_class_names', array_values( array_unique( array_filter( $classnames ) ) ), $attrs );
 }
 
 /**

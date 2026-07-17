@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HBS_VERSION', '0.1.0' );
-define( 'HBS_REST_NAMESPACE', 'headless-block-styles/v1' );
-define( 'HBS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'HEADLESS_BLOCK_STYLES_VERSION', '0.1.0' );
+define( 'HEADLESS_BLOCK_STYLES_REST_NAMESPACE', 'headless-block-styles/v1' );
+define( 'HEADLESS_BLOCK_STYLES_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-require HBS_PLUGIN_DIR . 'includes/styles.php';
-require HBS_PLUGIN_DIR . 'includes/rest.php';
+require HEADLESS_BLOCK_STYLES_PLUGIN_DIR . 'includes/styles.php';
+require HEADLESS_BLOCK_STYLES_PLUGIN_DIR . 'includes/rest.php';

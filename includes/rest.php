@@ -31,7 +31,7 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\\register_routes' );
  */
 function register_routes() {
 	register_rest_route(
-		HBS_REST_NAMESPACE,
+		HEADLESS_BLOCK_STYLES_REST_NAMESPACE,
 		'/stylesheet',
 		array(
 			'methods'             => WP_REST_Server::READABLE,
@@ -58,7 +58,7 @@ function register_routes() {
 	);
 
 	register_rest_route(
-		HBS_REST_NAMESPACE,
+		HEADLESS_BLOCK_STYLES_REST_NAMESPACE,
 		'/theme',
 		array(
 			'methods'             => WP_REST_Server::READABLE,
@@ -107,7 +107,7 @@ add_filter( 'rest_pre_serve_request', __NAMESPACE__ . '\\serve_raw_css', 10, 3 )
  * @return bool
  */
 function serve_raw_css( $served, $result, $request ) {
-	if ( $served || '/' . HBS_REST_NAMESPACE . '/stylesheet' !== $request->get_route() ) {
+	if ( $served || '/' . HEADLESS_BLOCK_STYLES_REST_NAMESPACE . '/stylesheet' !== $request->get_route() ) {
 		return $served;
 	}
 
@@ -153,7 +153,7 @@ function register_block_data_field() {
 	 *
 	 * @param string[] $post_types Post type names.
 	 */
-	$post_types = apply_filters( 'hbs_post_types', array_values( $post_types ) );
+	$post_types = apply_filters( 'headless_block_styles_post_types', array_values( $post_types ) );
 
 	register_rest_field(
 		$post_types,

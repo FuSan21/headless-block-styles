@@ -1,0 +1,7 @@
+.git
+.github
+.gitignore
+.distignore
+.wp-env.json
+README.md
+node_modules
