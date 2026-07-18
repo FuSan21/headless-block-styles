@@ -1,5 +1,5 @@
 === Headless Block Styles ===
-Contributors: fusan
+Contributors: fusan1
 Tags: headless, rest-api, gutenberg, blocks, decoupled
 Requires at least: 6.1
 Tested up to: 7.0
